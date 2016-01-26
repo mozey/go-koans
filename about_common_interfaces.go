@@ -1,6 +1,10 @@
 package go_koans
 
-import "bytes"
+import (
+	"bytes"
+	"io"
+//	"fmt"
+)
 
 func aboutCommonInterfaces() {
 	{
@@ -17,7 +21,7 @@ func aboutCommonInterfaces() {
 		   $ open http://localhost:8080/pkg/io/
 		   $ open http://localhost:8080/pkg/bytes/
 		*/
-
+		io.Copy(out, in)
 		assert(out.String() == "hello world") // get data from the io.Reader to the io.Writer
 	}
 
@@ -27,6 +31,9 @@ func aboutCommonInterfaces() {
 
 		out := new(bytes.Buffer)
 
+		io.CopyN(out, in, 5)
+
+//		fmt.Println(out.String())
 		assert(out.String() == "hello") // duplicate only a portion of the io.Reader
 	}
 }
